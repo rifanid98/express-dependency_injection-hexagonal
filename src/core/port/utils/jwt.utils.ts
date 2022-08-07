@@ -1,14 +1,22 @@
+export type JwtResponse<T> = {
+  isError: boolean;
+  error?: Error;
+  token?: string;
+  decoded?: T;
+};
+
 interface JwtInterface {
-  sign(payload: any): string;
-  verify(payload: any): boolean;
+  sign(payload: any): JwtResponse<string>;
+
+  verify<T>(payload: any): Promise<JwtResponse<T>>;
 }
 
-export class Jwt implements JwtInterface {
-  sign(payload: any): string {
-    return "";
+export class JWT implements JwtInterface {
+  sign(payload: any): JwtResponse<string> {
+    return { isError: false };
   }
 
-  verify(payload: any): boolean {
-    return false;
+  async verify<T>(payload: any): Promise<JwtResponse<T>> {
+    return { isError: false };
   }
 }

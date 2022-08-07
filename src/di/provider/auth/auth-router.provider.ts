@@ -3,7 +3,7 @@ import {
   AuthControllerImpl,
 } from "../../../interface/extl/v1/auth";
 import { Router } from "express";
-import { ProviderRegistry } from "../../../utils";
+import { ProviderRegistry } from "../../type";
 
 export const AuthHandlerProvider: ProviderRegistry[] = [
   {

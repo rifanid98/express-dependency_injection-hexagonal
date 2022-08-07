@@ -1,21 +1,9 @@
 import { HttpMessage, HttpStatus } from "../core/constant/http.constant";
-
-export type GlobalResponse = {
-  statusCode: number;
-  message?: string;
-  data?: any | any[];
-  error?: any | any[];
-};
-
-export type GlobalResponseWithData = {
-  message?: string;
-  data?: any | any[];
-};
-
-export type GlobalResponseWithError = {
-  message?: string;
-  error?: any | any[];
-};
+import {
+  GlobalResponse,
+  GlobalResponseWithData,
+  GlobalResponseWithError,
+} from "../core/constant/resp.constant";
 
 export class Response {
   static resp: GlobalResponse;
@@ -42,7 +30,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.INTERNAL_SERVER_ERROR;
-    } else this.resp.message = HttpMessage.INTERNAL_SERVER_ERROR;
+    } else {
+      this.resp.message = HttpMessage.INTERNAL_SERVER_ERROR;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -52,7 +44,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.BAD_REQUEST;
-    } else this.resp.message = HttpMessage.BAD_REQUEST;
+    } else {
+      this.resp.message = HttpMessage.BAD_REQUEST;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -62,7 +58,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.SERVICE_UNAVAILABLE;
-    } else this.resp.message = HttpMessage.SERVICE_UNAVAILABLE;
+    } else {
+      this.resp.message = HttpMessage.SERVICE_UNAVAILABLE;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -72,7 +72,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.NOT_FOUND;
-    } else this.resp.message = HttpMessage.NOT_FOUND;
+    } else {
+      this.resp.message = HttpMessage.NOT_FOUND;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -82,7 +86,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.NOT_MODIFIED;
-    } else this.resp.message = HttpMessage.NOT_MODIFIED;
+    } else {
+      this.resp.message = HttpMessage.NOT_MODIFIED;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -92,7 +100,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.UNPROCESSABLE_ENTITY;
-    } else this.resp.message = HttpMessage.UNPROCESSABLE_ENTITY;
+    } else {
+      this.resp.message = HttpMessage.UNPROCESSABLE_ENTITY;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -102,7 +114,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.UNAUTHORIZED;
-    } else this.resp.message = HttpMessage.UNAUTHORIZED;
+    } else {
+      this.resp.message = HttpMessage.UNAUTHORIZED;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -112,7 +128,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.FORBIDDEN;
-    } else this.resp.message = HttpMessage.FORBIDDEN;
+    } else {
+      this.resp.message = HttpMessage.FORBIDDEN;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -122,7 +142,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.CONFLICT;
-    } else this.resp.message = HttpMessage.CONFLICT;
+    } else {
+      this.resp.message = HttpMessage.CONFLICT;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 
@@ -132,7 +156,11 @@ export class Response {
     if (error?.message) {
       this.resp.message = error.message;
       this.resp.error = HttpMessage.GONE;
-    } else this.resp.message = HttpMessage.GONE;
+    } else {
+      this.resp.message = HttpMessage.GONE;
+      this.resp.error = error.error;
+      this.resp.errors = error.errors;
+    }
     return this.resp;
   }
 

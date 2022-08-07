@@ -1,14 +1,14 @@
-import { ConfigImpl, ProviderRegistry, SecurityImpl } from "../../../utils";
+import { SecurityImpl } from "../../../utils";
 import {
   AuthPresenter,
   AuthPresenterImpl,
 } from "../../../interface/extl/v1/auth/auth.presenter";
-import { JwtImpl } from "../../../utils/jwt";
-import { Config } from "../../../core/port/utils/config.utils";
-import { Jwt } from "../../../core/port/utils/jwt.utils";
+import { JwtImpl } from "../../../utils/jwt.impl";
+import { JWT } from "../../../core/port/utils/jwt.utils";
 import { Security } from "../../../core/port/utils/security.utils";
 import { UserRepository } from "../../../core/port/repository";
 import { UserRepositoryImpl } from "../../../infrastructure/persistence/postgresql/repository";
+import { ProviderRegistry } from "../../type";
 
 export const AuthServiceProvider: ProviderRegistry[] = [
   {
@@ -20,12 +20,8 @@ export const AuthServiceProvider: ProviderRegistry[] = [
     useClass: UserRepositoryImpl,
   },
   {
-    token: Jwt,
+    token: JWT,
     useClass: JwtImpl,
-  },
-  {
-    token: Config,
-    useClass: ConfigImpl,
   },
   {
     token: Security,

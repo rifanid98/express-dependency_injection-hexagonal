@@ -18,7 +18,7 @@ export class AuthRouter extends AppRouter {
   }
 
   public routes() {
-    this.router.all("/signin", (req, res) => this.controller.signin(req, res));
-    this.router.all("/signup", (req, res) => this.controller.signup(req, res));
+    this.router.post("/signin", this.controller.signin.bind(this.controller));
+    this.router.post("/signup", this.controller.signup.bind(this.controller));
   }
 }

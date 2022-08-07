@@ -1,50 +1,28 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  Length,
-  Matches,
-  MaxLength,
-  MinLength,
-} from "class-validator";
+import { IsNotEmpty, Matches, MaxLength, MinLength } from "class-validator";
+import { User } from "../../../../core/entity";
 
-export class AuthSignUpDto {
+export class AuthSignUpDto extends User {
   @IsNotEmpty()
-  @IsEmail()
-  email: string;
+  @MinLength(6)
+  username: string;
 
   @IsNotEmpty()
   @MinLength(8)
   @MaxLength(32)
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message:
-      "Passwords should contain at least 1 upper case letter|" +
-      "Passwords should contain at least 1 lower case letter|" +
-      "Passwords should contain at least 1 number or special character",
+      "passwords should contain at least 1 upper case letter|" +
+      "passwords should contain at least 1 lower case letter|" +
+      "passwords should contain at least 1 number or special character",
   })
   password: string;
 }
 
-export class AuthSignInDto {
+export class AuthSignInDto extends User {
   @IsNotEmpty()
-  @IsEmail()
-  email: string;
+  @MinLength(6)
+  username: string;
 
   @IsNotEmpty()
-  @MinLength(8)
-  @MaxLength(32)
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message:
-      "Passwords should contain at least 1 upper case letter|" +
-      "Passwords should contain at least 1 lower case letter|" +
-      "Passwords should contain at least 1 number or special character",
-  })
   password: string;
-}
-
-export class AuthAuthenticateDto {
-  @IsNotEmpty()
-  @Length(6, 6)
-  @IsString()
-  authenticator_code: string;
 }

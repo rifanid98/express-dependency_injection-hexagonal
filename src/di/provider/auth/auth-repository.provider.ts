@@ -1,5 +1,5 @@
-import { ProviderRegistry } from "../../../utils";
 import KnexInstance from "../../../infrastructure/persistence/postgresql/knex/knex";
+import { ProviderRegistry } from "../../type";
 
 export const AuthRepositoryProvider: ProviderRegistry[] = [
   {

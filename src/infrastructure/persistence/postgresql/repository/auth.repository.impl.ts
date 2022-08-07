@@ -14,8 +14,8 @@ export class AuthRepositoryImpl implements AuthRepository {
     return Promise.resolve(user);
   }
 
-  signup(user: User): Promise<User> {
-    const queryBuilder = this.db.knex.insert(user).into("users");
+  async signup(user: User): Promise<User> {
+    const queryBuilder = await this.db.knex.insert(user).into("users");
     console.log(queryBuilder);
     return Promise.resolve(user);
   }

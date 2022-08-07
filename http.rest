@@ -3,8 +3,8 @@ POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-  "username": "adninrifandisutantoputra",
-  "password": "password"
+  "username": "rifanid",
+  "password": "32124Dsa"
 }
 
 ### Signup
@@ -12,9 +12,13 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "username": "adninrifandisutantoputra",
-  "password": "password"
+  "username": "rifanid",
+  "password": "32124Dsa"
 }
 
+### Health
+GET http://localhost:3000/health/
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWQzNGYyLWJiMDItNDM5MS05ZmFmLWFkMjQzNjk0NDExOCIsInVzZXJuYW1lIjoicmlmYW5pZCIsImlhdCI6MTY1OTg4MjM5OSwiZXhwIjoxNjU5OTY4Nzk5fQ.kUZDpMDw_5BqYTdzn-QPPECTCLJOATB0vKoz9g4nXkA
 
 ###

@@ -1,5 +1,6 @@
 export type LogData = {
   error?: Error;
+  errors?: Error[];
   message?: string;
   stacktrace?: string;
 };

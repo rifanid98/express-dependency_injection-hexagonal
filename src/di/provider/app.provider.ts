@@ -1,6 +1,6 @@
-import { ProviderRegistry } from "../../utils";
 import * as express from "express";
-import { AuthRouter } from "../../interface/extl/v1/router";
+import { AuthRouter, HealthRouter } from "../../interface/extl/v1/router";
+import { ProviderRegistry } from "../type";
 
 export const AppProvider: ProviderRegistry[] = [
   {
@@ -9,6 +9,6 @@ export const AppProvider: ProviderRegistry[] = [
   },
   {
     token: "AppRouters",
-    useValue: [new AuthRouter()],
+    useValue: [new AuthRouter(), new HealthRouter()],
   },
 ];

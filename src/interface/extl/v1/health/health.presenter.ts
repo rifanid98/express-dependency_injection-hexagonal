@@ -1,7 +1,7 @@
 import { User, UserEntityInterface } from "../../../../core/entity/user.entity";
 import { singleton } from "tsyringe";
 
-export class AuthPresenter {
+export class HealthPresenter {
   json(entity: User): UserEntityInterface {
     return undefined;
   }
@@ -16,7 +16,7 @@ export class AuthPresenter {
 }
 
 @singleton()
-export class AuthPresenterImpl implements AuthPresenter {
+export class AuthPresenterImpl implements HealthPresenter {
   show(entity: User): User {
     const presenter = new User();
     presenter.id = entity.id;
