@@ -1,15 +1,17 @@
 // Update with your config settings.
 import * as path from "path";
+import * as dotenv from "dotenv";
 
 require("ts-node/register");
 
-import * as dotenv from "dotenv";
 dotenv.config();
 
 const configs = {
   development: {
     client: "postgresql",
     connection: {
+      host: process.env.DATABASE_HOST,
+      port: process.env.DATABASE_PORT,
       database: process.env.DATABASE_NAME_DEVELOPMENT,
       user: process.env.DATABASE_USER_DEVELOPMENT,
       password: process.env.DATABASE_PASSWORD_DEVELOPMENT,
@@ -30,37 +32,9 @@ const configs = {
     },
   },
 
-  staging: {
-    client: "pg",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
-    },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: "knex_migrations",
-    },
-  },
+  staging: {},
 
-  production: {
-    client: "pg",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
-    },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: "knex_migrations",
-    },
-  },
+  production: {},
 };
 
 const environment = process.env.ENVIRONMENT || "development";
