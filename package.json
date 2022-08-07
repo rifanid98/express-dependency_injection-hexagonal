@@ -19,6 +19,8 @@
     "knex:seed:run": "knex --knexfile .//knexfile.ts seed:run"
   },
   "dependencies": {
+    "@sentry/node": "^7.9.0",
+    "@sentry/tracing": "^7.9.0",
     "bcrypt": "^5.0.1",
     "class-validator": "^0.13.1",
     "compression": "^1.7.4",
@@ -29,6 +31,7 @@
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "knex": "^2.2.0",
+    "newrelic": "^9.0.0",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "speakeasy": "^2.0.0",

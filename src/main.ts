@@ -1,8 +1,7 @@
 import "reflect-metadata";
-import { autoInjectable, inject, registry } from "tsyringe";
-
 import * as express from "express";
 import { Application, Express } from "express";
+import { autoInjectable, inject, registry } from "tsyringe";
 import * as cors from "cors";
 import * as helmet from "helmet";
 import * as cookieParser from "cookie-parser";
@@ -10,6 +9,8 @@ import * as compression from "compression";
 import { config as dotenv } from "dotenv";
 import { AppRouter } from "./interface/extl/v1/router";
 import { AppProvider } from "./di/provider/app.provider";
+
+import "newrelic";
 
 @autoInjectable()
 @registry(AppProvider)
