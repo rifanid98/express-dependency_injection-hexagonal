@@ -8,7 +8,7 @@ import { autoInjectable, singleton } from "tsyringe";
 export class LoggerImpl implements Logger {
   constructor() {
     Sentry.init({
-      dsn: "https://78d9f657a0594e148bfe20bfcb3a72aa@o1338022.ingest.sentry.io/6629615",
+      dsn: process.env.SENTRY_DSN,
 
       // Set tracesSampleRate to 1.0 to capture 100%
       // of transactions for performance monitoring.
