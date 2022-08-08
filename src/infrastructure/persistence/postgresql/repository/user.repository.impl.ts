@@ -41,19 +41,18 @@ export class UserRepositoryImpl implements UserRepository {
         .select("*")
         .where({ username: username });
 
+      if (users.length < 1) {
+        return { message: "user not found" };
+      }
+
       const user = new User();
       this.mapTypeToEntity(users[0], user);
 
-      return {
-        isError: false,
-        user: user,
-      };
+      return { user: user };
     } catch (e) {
       this.logger.Error(e);
       return {
-        isError: true,
         error: e,
-        user: new User(),
       };
     }
   }

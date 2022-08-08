@@ -7,9 +7,9 @@ export type Signup = {
 };
 
 export type Signin = {
-  isError: boolean;
   error?: Error;
-  jwt: string;
+  message?: string;
+  jwt?: string;
 };
 
 interface AuthServiceInterface {

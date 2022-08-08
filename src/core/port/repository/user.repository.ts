@@ -1,9 +1,9 @@
 import { User } from "core/entity/user.entity";
 
 export type GetByUsername = {
-  isError: boolean;
   error?: Error;
-  user: User;
+  message?: string;
+  user?: User;
 };
 
 interface UserRepositoryInterface {

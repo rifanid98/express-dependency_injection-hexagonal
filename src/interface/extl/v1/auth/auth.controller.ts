@@ -45,22 +45,26 @@ export class AuthControllerImpl implements AuthController {
         .send(HttpResponse.badrequest({ errors: validate.messages }));
     }
 
-    const {
-      isError,
-      error: signupError,
-      jwt: result,
-    } = await this.service.signin(user);
-    if (isError) {
+    const result = await this.service.signin(user);
+    if (result.error) {
       return res
         .status(HttpStatus.UNPROCESSABLE_ENTITY)
-        .send(HttpResponse.unprocessableentity({ error: signupError.message }));
+        .send(
+          HttpResponse.unprocessableentity({ error: result.error.message })
+        );
+    }
+
+    if (!result.jwt) {
+      return res
+        .status(HttpStatus.UNAUTHORIZED)
+        .send(HttpResponse.unauthorized({ message: "invalid credentials" }));
     }
 
     this.logger.Info({ message: "user signin success" });
 
     return res
       .status(HttpStatus.OK)
-      .send(HttpResponse.success({ data: result }));
+      .send(HttpResponse.success({ data: result.jwt }));
   }
 
   public async signup(req: Request, res: Response): Promise<GlobalResponse> {

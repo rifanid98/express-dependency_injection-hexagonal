@@ -33,20 +33,12 @@ export class AuthServiceImpl implements AuthService {
 
   async signin(user: User): Promise<Signin> {
     const result = await this.userRepository.getUserByUsername(user.username);
-    if (result.isError) {
-      return {
-        isError: true,
-        error: result.error,
-        jwt: "",
-      };
+    if (result.error) {
+      return { error: result.error };
     }
 
-    if (result.user.isEmpty()) {
-      return {
-        isError: true,
-        error: new Error("user is not exists"),
-        jwt: "",
-      };
+    if (!result.user) {
+      return { message: "user is not exists" };
     }
 
     const verified = await this.security.verify(
@@ -54,26 +46,17 @@ export class AuthServiceImpl implements AuthService {
       result.user.password
     );
     if (!verified) {
-      return {
-        isError: true,
-        error: new Error("credentials is invalid"),
-        jwt: "",
-      };
+      return { message: "credentials is invalid" };
     }
 
     const presentedUser = this.presenter.show(result.user);
     const jwtPayload = this.presenter.json(presentedUser);
     const jwt = this.jwt.sign(jwtPayload);
-    if (jwt.isError) {
-      return {
-        isError: true,
-        error: jwt.error,
-        jwt: "",
-      };
+    if (jwt.error) {
+      return { error: jwt.error };
     }
 
     return {
-      isError: false,
       jwt: jwt.token,
     };
   }

@@ -22,25 +22,21 @@ export class JwtImpl implements JWT {
 
   sign(payload: any): JwtResponse<string> {
     const token = jwt.sign(payload, this.secret, { expiresIn: this.expire });
-    return {
-      isError: false,
-      token: token,
-    };
+    return { token };
   }
 
-  async verify<T>(token: any): Promise<JwtResponse<T>> {
+  verify<T>(token: any): JwtResponse<T> {
     try {
       const decoded = jwt.verify(token, this.secret);
-      return {
-        isError: false,
-        decoded: decoded as T,
-      };
+      return { decoded: decoded as T };
     } catch (err) {
       this.logger.Error(err);
-      return {
-        isError: true,
-        error: err,
-      };
+      if (err.message.includes("invalid")) {
+        return { message: err.message };
+      }
+
+      // unexpected error
+      return { error: err.message };
     }
   }
 }

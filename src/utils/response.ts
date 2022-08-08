@@ -24,7 +24,7 @@ export class Response {
     return this.resp;
   }
 
-  static error(error?: GlobalResponseWithError): GlobalResponse {
+  static internalservererror(error?: GlobalResponseWithError): GlobalResponse {
     this.clear();
     this.resp.statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
     if (error?.message) {

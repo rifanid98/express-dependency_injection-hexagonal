@@ -38,7 +38,7 @@ export class AuthMiddlewareImpl implements AuthMiddleware {
     const authorization = req.headers.authorization;
     const auths = authorization?.split("Bearer ");
 
-    if (!auths || auths[0] === "") {
+    if (!auths || auths[1] === "") {
       return res
         .status(HttpStatus.UNAUTHORIZED)
         .send(HttpResponse.unauthorized({ message: "token is required" }));
@@ -46,10 +46,23 @@ export class AuthMiddlewareImpl implements AuthMiddleware {
 
     const token = auths?.length > 1 ? auths[1] : auths[0];
 
-    const verified = await this.jwt.verify<JwtClaims>(token);
-    if (verified.isError) {
-      this.logger.Error(verified.error);
-      res.status(HttpStatus.UNAUTHORIZED).send(HttpResponse.unauthorized());
+    const verified = this.jwt.verify<JwtClaims>(token);
+    if (verified?.error) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .send(HttpResponse.internalservererror());
+    }
+
+    if (verified?.message) {
+      return res
+        .status(HttpStatus.UNAUTHORIZED)
+        .send(HttpResponse.unauthorized({ message: "invalid credentials" }));
+    }
+
+    if (!verified.decoded) {
+      return res
+        .status(HttpStatus.UNAUTHORIZED)
+        .send(HttpResponse.unauthorized());
     }
 
     this.logger.Info({ message: "user authenticated" });
